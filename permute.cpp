@@ -16,13 +16,35 @@
 
 using namespace std;
 
+void permuteInts(vector<int> integers, int loc, int length) {
+	
+	if (loc == length-1)
+	{
+		for (int i = 0; i < integers.size(); ++i) { cout << integers[i] << " "; }
+		cout << endl;
+		return;		// base
+	}
+
+	for (int x = loc; x < length; ++x) {
+		swap(integers[x], integers[loc]);
+		permuteInts(integers, loc+1, length);
+		swap(integers[loc], integers[x]);
+	}
+}
+
 int main()
 {
-  // initialize a vector with some ints
+  	// initialize a vector with some ints
 	vector<int> test;
 	test.resize(5);
 	iota(test.begin(), test.end(), 0);
+	
+	// print out the initial vector
 	for (int i = 0; i < test.size(); ++i) { cout << test[i] << " "; }
-  
-  return 0; 
+	cout << endl;
+	
+	// print all permutations
+	permuteInts(test, 0, test.size());
+
+	return 0;
 }
